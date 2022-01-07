@@ -12,7 +12,12 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+// Unprotected routes
+Route::post('/login','UserLoginController');
+Route::post('/user/create','UserStoreController@createUser');
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Protected routes
+Route::middleware('auth:sanctum')->get('/users/get','UserReadController@getUsers');
+Route::middleware('auth:sanctum')->get('/cards/get','CardReadController@getCards');
+Route::middleware('auth:sanctum')->post('/cards/post','CardStoreController@storeCard');
+

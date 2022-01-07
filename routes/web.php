@@ -11,10 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
+// Route to VueJs application
+Route::get('/', 'VueInstanceController@render');
+
+Route::get('/{any}', function ($any) {
+	return redirect('/');
+})->where('any', 'login');
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
